@@ -1,0 +1,838 @@
+<title>Kennedy Vital Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@200;400;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: sky-blue backdrop with white "slide" cards, like a pastel project deck. Pastel panels (pink, misty blue, green, peach, lilac, mint, rose) carry the color. Thin tall numerals, bold condensed uppercase titles, hairline info tables, interlocking-ring motif. Five hash-routed pages (home, work, project-N, about, contact). */
+:root {
+  --sky: #F4F1EE;
+  --paper: #FFFFFF;
+  --ink: #17161A;
+  --muted: #5E5B63;
+  --line: #E4E0DB;
+  --p-pink: #F9C6D9;
+  --p-yellow: #C9E1F5;
+  --p-green: #CDEBDD;
+  --p-peach: #FBD3BF;
+  --p-lilac: #DCD0F5;
+  --p-mint: #C3E8EC;
+  --p-rose: #F4A9C6;
+  --rosewood: #E8559A;
+  --shadow: 0 10px 20px -10px rgba(23, 22, 26, 0.13);
+  --font-display: "Antonio", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--sky);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-block: 10px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--sky); }
+.wrap { max-width: 1180px; margin: 0 auto; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: 0.95; letter-spacing: 0; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+button { font-family: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+.label { font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.rings { width: 38px; height: 24px; flex: none; }
+.num { font-family: var(--font-display); font-weight: 200; font-size: clamp(60px, 7vw, 96px); line-height: 0.8; letter-spacing: -0.01em; }
+
+/* surfaces */
+.sheet { background: var(--paper); border-radius: 8px; box-shadow: var(--shadow); padding: clamp(20px, 3.4vw, 44px); min-width: 0; }
+.tile { background: var(--c); border-radius: 8px; box-shadow: var(--shadow); padding: clamp(20px, 2.6vw, 30px); display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+/* buttons and links */
+.btn { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; letter-spacing: 0.02em; padding: 13px 20px; border: 2px solid var(--ink); border-radius: 6px; background: var(--ink); color: #FFFFFF; text-decoration: none; cursor: pointer; transition: background .15s, color .15s; }
+.btn svg { width: 16px; height: 16px; }
+.btn:hover { background: var(--p-rose); color: var(--ink); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: var(--p-yellow); }
+.tl { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
+.tl svg { width: 16px; height: 16px; transition: transform .15s; }
+.tl:hover svg { transform: translateX(3px); }
+#yfc-home { gap: 10px 22px; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* nav */
+.nav { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 6px); z-index: 40; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 20px; background: var(--paper); border-radius: 8px; box-shadow: var(--shadow); padding: 12px 20px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+.links a { text-decoration: none; font-weight: 600; font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 0; border-bottom: 2px solid transparent; }
+.links a:hover { border-bottom-color: var(--p-rose); }
+.links a[aria-current="page"] { border-bottom-color: var(--ink); }
+
+.view { display: flex; flex-direction: column; gap: 56px; padding-top: 28px; }
+.sh { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 14px 24px; margin-bottom: 24px; }
+.sh h2 { font-size: clamp(36px, 5.4vw, 72px); }
+.sh .lead { max-width: 34em; }
+.sh > div { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+/* photos and slots */
+.ph { position: relative; width: 100%; aspect-ratio: var(--ar, 4 / 5); border-radius: 6px; overflow: hidden; background: var(--line); }
+.ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); display: block; }
+.ph.empty { background: var(--paper); border: 2px dashed #B8B3AC; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 14px; text-align: center; color: var(--muted); }
+.ph.empty svg { width: 26px; height: 26px; }
+.ph.empty strong { font-weight: 600; font-size: 14px; color: var(--ink); }
+.ph.empty span { font-size: 13px; }
+.ph.empty code { font-size: 11px; margin-top: 4px; font-weight: 600; }
+.mat { background: var(--c); border-radius: 8px; padding: clamp(8px, 1.2vw, 14px); }
+.cap { position: absolute; left: 12px; bottom: 12px; background: var(--paper); border-radius: 4px; padding: 5px 11px; font-size: 12px; font-weight: 600; z-index: 2; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+.hero .copy { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.hero .top { display: flex; align-items: center; gap: 14px; }
+.hero h1 { font-size: clamp(50px, 8.6vw, 128px); }
+.hero h1 span { font-weight: 200; }
+.hero .lede { font-size: clamp(16px, 1.8vw, 18px); max-width: 32em; color: var(--muted); }
+.hero .photo { position: relative; width: 100%; max-width: 420px; justify-self: end; margin: 0 20px 20px 0; }
+.hero .photo::before { content: ""; position: absolute; inset: 20px -20px -20px 20px; background: var(--p-pink); border-radius: 8px; }
+.hero .photo::after { content: ""; position: absolute; width: 74px; height: 74px; left: -22px; top: 36px; background: var(--p-peach); border-radius: 50%; z-index: 2; }
+.hero .photo .ph { position: relative; z-index: 1; }
+.hero .photo .cap { z-index: 3; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 20px; }
+.tile .big { font-family: var(--font-display); font-weight: 200; font-size: clamp(56px, 6.4vw, 88px); line-height: 0.85; }
+.tile .tt { font-size: 14.5px; max-width: 22em; }
+.tile h3 { font-size: 34px; }
+.tile p { max-width: 24em; }
+
+.pq { margin: 28px 0 0; font-family: var(--font-display); font-weight: 200; text-transform: uppercase; font-size: clamp(30px, 4.4vw, 58px); line-height: 1; max-width: 18em; text-wrap: balance; }
+.vb { display: grid; grid-template-columns: minmax(0, 0.55fr) minmax(0, 2.45fr); gap: clamp(20px, 3vw, 40px); align-items: center; margin-bottom: 20px; }
+.vbtxt { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.vbtxt h3 { font-size: clamp(34px, 4vw, 48px); }
+.vbtxt p { color: var(--muted); max-width: 26em; }
+.vbgrid { display: grid; grid-template-columns: 2.2fr 1fr 1fr; gap: 14px; height: clamp(280px, 38vw, 480px); min-width: 0; }
+.vbgrid .mat { display: flex; min-height: 0; }
+.vbgrid .ph.fill { height: 100%; aspect-ratio: auto; }
+.travelsheet { display: flex; flex-direction: column; gap: 24px; }
+.trrow { display: flex; flex-direction: column; gap: 10px; }
+.trrow h4 { margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 22px; letter-spacing: .02em; }
+.trgrid.three { grid-template-columns: minmax(0, 1fr) minmax(0, 1.75fr) minmax(0, 1fr); height: clamp(260px, 34vw, 420px); }
+.trgrid.three .mat { display: flex; min-height: 0; }
+.trgrid.three .ph { height: 100%; aspect-ratio: auto; }
+.trgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.travel { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 56px); align-items: center; }
+.twocol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.pcard { display: flex; flex-direction: column; gap: 14px; }
+.pcard h3 { font-size: 34px; }
+.pcard p { color: var(--muted); max-width: 30em; }
+.pstack { display: flex; flex-direction: column; gap: 24px; }
+.btn.sm { padding: 9px 14px; font-size: 13px; }
+.hero .sub { margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.05; letter-spacing: .02em; color: var(--rosewood); }
+.hero-tags { margin-top: 4px !important; }
+.brands { display: flex; flex-direction: column; gap: 14px; }
+.bnames { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 26px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(28px, 5vw, 60px); line-height: 1; }
+.bnames i { width: 10px; height: 10px; border-radius: 50%; background: var(--rosewood); flex: none; }
+.brands .note { margin: 0; }
+.tiles.four { grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+.svc .num, .tiles.four .num { font-size: clamp(48px, 5vw, 64px); }
+.tiles.four h3 { font-size: 30px; }
+.tiles.four p { font-size: 15px; }
+.svl { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: auto; padding-top: 6px; }
+.svl .tl { font-size: 14px; }
+.ben { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.ben .txt { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.ben h2 { font-size: clamp(44px, 6.4vw, 84px); }
+.ben p { color: var(--muted); max-width: 36em; }
+.bstats { display: flex; flex-wrap: wrap; gap: 14px 36px; border-top: 1px solid var(--ink); padding-top: 14px; }
+.bstats > div { display: flex; flex-direction: column; gap: 10px; }
+.bstats .big { font-family: var(--font-display); font-weight: 200; font-size: clamp(44px, 5vw, 64px); line-height: 1; }
+.skills { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; padding: 18px 26px; }
+.skills .label { color: var(--ink); display: inline-flex; align-items: center; gap: 22px; }
+.skills svg { width: 30px; height: 18px; color: var(--rosewood); }
+
+/* slide cards (projects) */
+.slist { display: flex; flex-direction: column; gap: 24px; }
+.sgrid#featured { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.sgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 24px; }
+.slide { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(20px, 3vw, 40px); background: var(--paper); border-radius: 8px; box-shadow: var(--shadow); padding: clamp(18px, 2.4vw, 28px); text-decoration: none; transition: transform .2s, box-shadow .2s; min-width: 0; }
+.slide:hover { transform: translateY(-4px); box-shadow: 0 18px 28px -12px rgba(23, 22, 26, 0.25); }
+.slide[hidden] { display: none !important; }
+.stxt { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.slide.rev .stxt .num { align-self: flex-end; }
+.slide.rev .simg { order: -1; }
+.slide h3 { font-size: clamp(28px, 3.4vw, 44px); }
+.slide .blurb { font-size: 14.5px; color: var(--muted); max-width: 28em; }
+.simg { position: relative; aspect-ratio: 4 / 3; background: var(--c); border-radius: 6px; overflow: hidden; }
+.simg img { position: absolute; inset: 9%; width: 82%; height: 82%; object-fit: contain; filter: drop-shadow(0 12px 16px rgba(23, 22, 26, 0.13)); transition: transform .35s; }
+.slide:hover .simg img { transform: scale(1.04); }
+.slide.v { display: flex; flex-direction: column; gap: 0; padding: 0; overflow: hidden; }
+.slide.v .simg { order: -1; border-radius: 0; aspect-ratio: 16 / 10; }
+.slide.v .stxt { padding: 22px 24px 26px; }
+.go { margin-top: auto; font-weight: 600; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; }
+.go svg { width: 16px; height: 16px; transition: transform .15s; }
+.slide:hover .go svg { transform: translateX(4px); }
+
+.tbl { display: grid; grid-template-columns: auto 1fr; margin: 0; border-top: 1px solid var(--ink); }
+.tbl dt, .tbl dd { margin: 0; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.tbl dt { padding-right: 24px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; }
+.tbl dd { font-weight: 500; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.tab { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: var(--paper); border: 2px solid var(--ink); border-radius: 6px; padding: 9px 16px; color: var(--ink); cursor: pointer; }
+.tab:hover { background: var(--p-yellow); }
+.tab[aria-pressed="true"] { background: var(--ink); color: #FFFFFF; }
+
+/* podcast band and cta */
+.band { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.band .txt { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.band h2 { font-size: clamp(34px, 4.8vw, 62px); }
+.band p { color: var(--muted); max-width: 30em; }
+.cta { background: var(--p-pink); color: var(--ink); border-radius: 8px; box-shadow: var(--shadow); padding: clamp(28px, 5vw, 64px); display: flex; flex-direction: column; gap: 26px; align-items: flex-start; }
+.cta h2 { font-size: clamp(44px, 8vw, 108px); max-width: 11em; }
+.cta h2 span { font-weight: 200; }
+.cta .btn { background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
+.cta .btn:hover { background: var(--paper); color: var(--ink); }
+.cta .btn.ghost { background: transparent; color: var(--ink); }
+.cta .btn.ghost:hover { background: var(--paper); color: var(--ink); }
+.cta .rings { color: var(--ink); }
+.skills .label:nth-child(3) svg { color: #5FA4E6; }
+.skills .label:nth-child(4) svg { color: #4FBF9A; }
+.skills .label:nth-child(5) svg { color: #9B86E0; }
+.skills .label:nth-child(6) svg { color: #F2915F; }
+.skills .label:nth-child(7) svg { color: #E8559A; }
+
+/* page heads */
+.phero { display: flex; flex-direction: column; gap: 14px; }
+.phero h1 { font-size: clamp(72px, 15vw, 210px); }
+.phero p { max-width: 38em; font-size: 17px; }
+
+/* project page */
+.back { align-self: flex-start; font-weight: 600; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; background: var(--paper); padding: 8px 14px; border-radius: 6px; box-shadow: var(--shadow); }
+.back svg { width: 16px; height: 16px; transform: rotate(180deg); }
+.back:hover { background: var(--p-yellow); }
+.phead { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 56px); align-items: stretch; }
+.phead .txt { display: flex; flex-direction: column; gap: 22px; min-width: 0; justify-content: space-between; }
+.phead .num { font-size: clamp(90px, 13vw, 190px); }
+.phead h1 { font-size: clamp(38px, 5.6vw, 76px); }
+.stage-img { position: relative; width: 100%; aspect-ratio: 4 / 3; background: var(--c); border-radius: 6px; overflow: hidden; }
+.stage-img img { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; filter: drop-shadow(0 16px 22px rgba(23, 22, 26, 0.3)); }
+.story { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.story .tile { gap: 14px; }
+.story .tile p { font-size: 15.5px; max-width: 34em; }
+.story .tile h3 { font-size: clamp(28px, 3vw, 38px); }
+.story .tile .num { font-size: clamp(48px, 5vw, 64px); }
+.atg { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; }
+.detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+.detail .sheet { display: flex; flex-direction: column; gap: 18px; }
+.detail h3 { font-size: 40px; }
+.detail p { color: var(--muted); max-width: 36em; }
+.lists { display: flex; flex-direction: column; gap: 22px; }
+.lists .label { display: block; margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.chips li { padding: 6px 12px; border-radius: 4px; background: var(--c); font-size: 14px; font-weight: 500; }
+.note { font-size: 14px; color: var(--muted); }
+.note b { font-weight: 600; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); margin-right: 8px; }
+.slots2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.thumbs-wrap { display: flex; flex-direction: column; gap: 14px; }
+.thumbs-wrap + .thumbs-wrap { margin-top: 36px; }
+.thumbs-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+.thumbs-head h4 { font-size: 24px; }
+.thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 14px; }
+.thumb { position: relative; padding: 0; border: 2px solid var(--ink); border-radius: 4px; overflow: hidden; background: var(--line); cursor: pointer; aspect-ratio: var(--ar, 16 / 9); transition: transform .2s, box-shadow .2s; }
+.thumb:hover { transform: translateY(-3px); box-shadow: 0 10px 18px -8px rgba(23, 22, 26, 0.25); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.thumb span { position: absolute; left: 6px; bottom: 6px; background: var(--paper); font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 3px; }
+.pn { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.pn a { text-decoration: none; display: flex; flex-direction: column; gap: 10px; min-width: 0; transition: transform .2s; }
+.pn a:hover { transform: translateY(-3px); }
+.pn a.next { text-align: right; align-items: flex-end; grid-column: 2; }
+.pn h3 { font-size: 30px; }
+
+/* about */
+.ahero { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.ahero .txt { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.ahero h1 { font-size: clamp(54px, 9vw, 130px); }
+.ahero .txt p { color: var(--muted); max-width: 36em; }
+.ahero .txt p:first-of-type { color: var(--ink); font-size: 19px; }
+.beyond { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 20px; }
+.beyond h3 { font-size: 30px; }
+.beyond p { font-size: 15px; max-width: 22em; }
+.gal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+
+/* contact */
+.chero { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+.chero .txt { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.chero h1 { font-size: clamp(72px, 13vw, 180px); }
+.chero .txt > p { max-width: 32em; color: var(--muted); font-size: 17px; }
+.clist { display: flex; flex-direction: column; border-top: 1px solid var(--ink); }
+.crow { display: grid; grid-template-columns: 130px minmax(0, 1fr) auto; gap: 8px 20px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.crow .value { font-family: var(--font-display); font-weight: 700; font-size: clamp(18px, 2vw, 23px); letter-spacing: 0.02em; overflow-wrap: anywhere; user-select: all; }
+.crow .btn { padding: 7px 12px; font-size: 13px; }
+
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 72px; padding-top: 18px; border-top: 2px solid var(--ink); font-size: 13px; font-weight: 500; }
+
+@media (max-width: 860px) {
+  .story { grid-template-columns: minmax(0, 1fr); }
+  .twocol { grid-template-columns: minmax(0, 1fr); }
+  .vb, .travel { grid-template-columns: minmax(0, 1fr); }
+  .trgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trgrid.three { height: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trgrid.three .mat:nth-child(2) { grid-column: 1 / -1; order: -1; }
+  .trgrid.three .ph { height: auto; aspect-ratio: 4 / 5; }
+  .trgrid.three .mat:nth-child(2) .ph { aspect-ratio: 4 / 3; }
+  .vbgrid { height: auto; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .vbgrid .mat:first-child { grid-column: 1 / -1; }
+  .vbgrid .ph.fill { height: auto; aspect-ratio: 4 / 5; }
+  .vbgrid .mat:first-child .ph.fill { aspect-ratio: 1 / 1; }
+  .ben { grid-template-columns: minmax(0, 1fr); }
+  .ben .mat { max-width: 360px; }
+  .hero, .band, .phead, .detail, .ahero, .chero { grid-template-columns: minmax(0, 1fr); }
+  .hero .photo { justify-self: start; max-width: 340px; }
+  .slide { grid-template-columns: minmax(0, 1fr); }
+  .slide .simg, .slide.rev .simg { order: -1; }
+  .slide.rev .stxt .num { align-self: flex-start; }
+  .slots2 { grid-template-columns: minmax(0, 1fr); }
+  .gal { grid-template-columns: minmax(0, 1fr); }
+  .crow { grid-template-columns: minmax(0, 1fr) auto; }
+  .crow .label { grid-column: 1 / -1; }
+  .view { gap: 44px; }
+  footer { margin-top: 56px; }
+}
+@media (max-width: 520px) {
+  .pn { grid-template-columns: minmax(0, 1fr); }
+  .pn a.next { grid-column: auto; text-align: left; align-items: flex-start; }
+  .nav { padding: 12px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide, .simg img, .thumb, .pn a, .tl svg, .go svg { transition: none; }
+}
+
+/* in-page viewer */
+.viewer { position: fixed; inset: 0; z-index: 60; background: var(--ink); color: #FFFFFF; display: flex; flex-direction: column; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.vbar { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 12px 16px; border-bottom: 1px solid #2D323A; }
+.vbar .vt { font-family: var(--font-display); font-weight: 700; font-size: 20px; text-transform: uppercase; flex: 1 1 200px; min-width: 0; }
+.vbar .vc { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; color: #B7BEC8; }
+.vbtn { font-weight: 600; font-size: 13px; padding: 7px 14px; border: 2px solid #5A616B; border-radius: 6px; background: transparent; color: #FFFFFF; cursor: pointer; }
+.vbtn:hover:not(:disabled) { background: var(--p-pink); color: var(--ink); border-color: var(--p-pink); }
+.vbtn:disabled { opacity: .35; cursor: default; }
+.viewer :focus-visible { outline: 3px solid var(--p-pink); }
+.stage { flex: 1 1 auto; min-height: 0; overflow: auto; display: flex; align-items: center; justify-content: center; padding: 12px; }
+.stage img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; background: #FFFFFF; border-radius: 4px; }
+.stage.zoom { align-items: flex-start; justify-content: flex-start; }
+.stage.zoom img { max-width: none; max-height: none; width: 1500px; }
+.vnav { display: flex; gap: 10px; justify-content: center; padding: 10px 16px 14px; }
+</style>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <symbol id="i-rings" viewBox="0 0 40 24"><g fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9.5"/><circle cx="20" cy="12" r="9.5"/><circle cx="28" cy="12" r="9.5"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+</svg>
+
+<div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="#home"><svg class="rings" viewBox="0 0 40 24" aria-hidden="true"><use href="#i-rings"/></svg>Kennedy Vital</a>
+    <div class="links" id="links">
+      <a href="#home" data-r="home">Home</a>
+      <a href="#work" data-r="work">Work</a>
+      <a href="#about" data-r="about">About</a>
+      <a href="#contact" data-r="contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HOME -->
+    <div class="view" id="v-home">
+      <section class="sheet hero">
+        <div class="copy">
+          <div class="top"><svg class="rings" viewBox="0 0 40 24" aria-hidden="true"><use href="#i-rings"/></svg><span class="label">IE University · Madrid · Open to brand collaborations</span></div>
+          <h1>Kennedy <span>Vital</span></h1>
+          <p class="sub">Marketing &amp; Campaign Portfolio</p>
+          <p class="lede">Strategy, storytelling, and content that help brands connect with people.</p>
+          <div class="row">
+            <a class="btn" href="#work">See my campaigns <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn ghost" href="#contact">Work with me</a>
+          </div>
+          <ul class="chips hero-tags" aria-label="What I do"><li style="--c: var(--p-pink)">Podcast hosting</li><li style="--c: var(--p-yellow)">Podcast production</li><li style="--c: var(--p-green)">Campaign strategy</li><li style="--c: var(--p-peach)">Social content</li><li style="--c: var(--p-lilac)">Audience insight</li></ul>
+        </div>
+        <div class="photo">
+          <div class="ph" data-slot="hero-portrait" data-label="Portrait of Kennedy" data-ar="4 / 5"></div>
+          <span class="cap">Madrid · Houston</span>
+        </div>
+      </section>
+
+      <section class="tiles" aria-label="At a glance">
+        <div class="tile" style="--c: var(--p-pink)"><span class="big">7.4K</span><span class="tt">YouTube impressions for Young Founders Collective, with 922 views</span></div>
+        <div class="tile" style="--c: var(--p-yellow)"><span class="big">25</span><span class="tt">episodes co-hosted on The BEN Show, with live expert interviews</span></div>
+        <div class="tile" style="--c: var(--p-green)"><span class="big">2</span><span class="tt">podcasts I host or produce: The BEN Show and Young Founders Collective</span></div>
+      </section>
+
+      <section class="podcasts" aria-label="My podcasts">
+        <div class="sh"><div><span class="label">My strongest work</span><h2>My podcasts.</h2></div><p class="lead">Co-hosting, producing, and promoting shows is where I do my best work.</p></div>
+        <div class="pstack">
+      <section class="sheet band">
+        <div class="mat" style="--c: var(--p-yellow)"><div class="ph" data-slot="home-podcast" data-label="Portrait of Kennedy" data-ar="3 / 2"></div></div>
+        <div class="txt">
+          <span class="label">Beyond the classroom</span>
+          <h2>I produce Young Founders Collective.</h2>
+          <p>Young Founders Collective is a podcast about young entrepreneurs. I produced the show and created the promotional content that introduces it to aspiring founders: a launch teaser, founder Q&As, advice quotes, and a business-tips carousel.</p>
+          <div class="row"><a class="tl" href="#project-7">See the project <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <div id="yfc-stats-home"></div>
+          <div class="row" id="yfc-home"></div>
+        </div>
+      </section>
+      <div id="ben-home"></div>
+        </div>
+      </section>
+
+      <section class="sheet brands" aria-label="Brands I have worked on">
+        <span class="label">Campaigns, strategies and audits for</span>
+        <div class="bnames"><span>Owala × amika</span><i></i><span>McDonald's</span><i></i><span>Amazon</span><i></i><span>Revlon</span></div>
+        <p class="note">Student projects and proposals built around real brands.</p>
+      </section>
+
+      <section>
+        <div class="sh">
+          <div><span class="label">What I do for brands</span><h2>Strategy, content, and storytelling.</h2></div>
+          <p class="lead">Four ways I can help a brand reach its audience, each shown in a project below.</p>
+        </div>
+        <div class="tiles four">
+          <div class="tile" style="--c: var(--p-pink)"><span class="num">01</span><h3>Podcast production</h3><p>Co-hosting and producing shows, and the promotion that gets them heard.</p><div class="svl"><a class="tl" href="#project-7">Young Founders Collective</a><a class="tl" href="#project-8">The BEN Show</a></div></div>
+          <div class="tile" style="--c: var(--p-yellow)"><span class="num">02</span><h3>Campaign concepts</h3><p>Big ideas built around one clear message and a defined audience.</p><div class="svl"><a class="tl" href="#project-1">Owala × amika</a><a class="tl" href="#project-5">Revlon ECLIPSE</a><a class="tl" href="#project-6">Fast fashion</a></div></div>
+          <div class="tile" style="--c: var(--p-green)"><span class="num">03</span><h3>Strategy and audits</h3><p>Research-led plans that close the gap between a brand and how people see it.</p><div class="svl"><a class="tl" href="#project-2">McDonald's CSR</a><a class="tl" href="#project-3">Amazon audit</a></div></div>
+          <div class="tile" style="--c: var(--p-lilac)"><span class="num">04</span><h3>Social content</h3><p>Creator-style video, posters, and mockups shaped for each platform.</p><div class="svl"><a class="tl" href="#project-3">Prime Big Deal Days</a><a class="tl" href="#project-6">Digital posters</a></div></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="sh">
+          <div><span class="label">Selected campaigns</span><h2>Campaigns and strategy.</h2></div>
+          <a class="tl" href="#work">All eight projects <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="sgrid" id="featured"></div>
+      </section>
+
+      <section class="cta">
+        <svg class="rings" viewBox="0 0 40 24" aria-hidden="true"><use href="#i-rings"/></svg>
+        <h2>Let's build something <span>your audience remembers.</span></h2>
+        <div class="row">
+          <a class="btn" href="#contact">Work with me <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn ghost" href="#work">Browse the work</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- WORK -->
+    <div class="view" id="v-work" hidden>
+      <section class="phero">
+        <span class="label">Selected work</span>
+        <h1>Work</h1>
+        <p>My podcasts come first, then the campaigns, strategies and audits from my studies. The campaign work is mostly proposals and concepts, so it describes intended ideas, not measured results. Open any project for the full story and the pages themselves.</p>
+      </section>
+      <section>
+        <div class="tabs" role="group" aria-label="Filter projects" id="filters">
+          <button class="tab" type="button" data-f="all" aria-pressed="true">All</button>
+          <button class="tab" type="button" data-f="content" aria-pressed="false">Podcasts</button>
+          <button class="tab" type="button" data-f="campaign" aria-pressed="false">Campaigns</button>
+          <button class="tab" type="button" data-f="strategy" aria-pressed="false">Strategy and audits</button>
+          <button class="tab" type="button" data-f="product" aria-pressed="false">Product design</button>
+        </div>
+        <div class="slist" id="allwork"></div>
+      </section>
+    </div>
+
+    <!-- PROJECT (rendered by script) -->
+    <div class="view" id="v-project" hidden></div>
+
+    <!-- ABOUT -->
+    <div class="view" id="v-about" hidden>
+      <section class="sheet ahero">
+        <div class="mat" style="--c: var(--p-pink)"><div class="ph" data-slot="about-portrait" data-label="Portrait of Kennedy" data-ar="4 / 5"></div></div>
+        <div class="txt">
+          <span class="label">About me</span>
+          <h1>Hi, I'm Kennedy.</h1>
+          <p>I'm a second-year Communication and Digital Media Marketing student at IE University in Madrid, originally from Houston, Texas.</p>
+          <p>I love developing campaigns from the first idea to the final piece of content, especially planning the steps, shaping the message, and finding creative ways to reach an audience. I'm fascinated by how customer psychology influences the way people connect with brands.</p>
+          <p>I'm excited to create thoughtful campaigns that resonate with people and help brands build lasting communities.</p>
+          <dl class="tbl">
+            <dt>Studying</dt><dd>Communication and Digital Media Marketing</dd>
+            <dt>School</dt><dd>IE University, second year</dd>
+            <dt>Based in</dt><dd>Madrid, Spain</dd>
+            <dt>From</dt><dd>Houston, Texas</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section>
+        <div class="sh"><div><span class="label">My story</span><h2>How I got here.</h2></div><p class="lead">It started with a sewing machine and a pandemic spring break.</p></div>
+        <div class="tiles">
+          <div class="tile" style="--c: var(--p-pink)"><span class="num">01</span><h3>A mask business</h3><p>During COVID-19 I started sewing masks in playful fabrics for my community. I built a system, formed a team, and made more than 600 masks in three months. The business earned $3,000 in profit, and I donated $1,500 to No Kid Hungry.</p></div>
+          <div class="tile" style="--c: var(--p-yellow)"><span class="num">02</span><h3>Learning business</h3><p>That first taste of business led me to the International Business and Marketing Academy at Travis High School. I spent summers in the Wharton Global Youth Program, Harvard's Business Entrepreneurship Academy, and Boston University's Academic Immersion, learning marketing and strategy alongside international students.</p></div>
+          <div class="tile" style="--c: var(--p-green)"><span class="num">03</span><h3>Finding my voice</h3><p>In my sophomore year I auditioned for The BEN Show, Blue Energy Nation's weekly podcast that educates young adults about the energy industry without political bias. I also sat on its advisory board, helping plan promotion, social media, and listener contests.</p></div>
+        </div>
+        <p class="pq">&ldquo;I want to use business to connect communities, build relationships, and inspire others.&rdquo;</p>
+      </section>
+
+      <section>
+        <div class="sh"><div><span class="label">Outside of work</span><h2>Volleyball and travel.</h2></div></div>
+        <div class="sheet vb">
+          <div class="vbtxt"><h3>Volleyball</h3><p>I play volleyball, and I love the energy of being part of a team.</p></div>
+          <div class="vbgrid">
+            <div class="mat" style="--c: var(--p-pink)"><div class="ph fill" data-slot="vb-team" data-label="Volleyball team photo" data-ar="1 / 1"></div></div>
+            <div class="mat" style="--c: var(--p-lilac)"><div class="ph fill" data-slot="vb-solo" data-label="Volleyball photo" data-ar="2 / 3"></div></div>
+            <div class="mat" style="--c: var(--p-green)"><div class="ph fill" data-slot="vb-duo" data-label="Volleyball photo" data-ar="2 / 3"></div></div>
+          </div>
+        </div>
+        <div class="sheet travelsheet">
+          <div class="vbtxt"><h3>Travel</h3><p>I love traveling. Living between Houston and Madrid has made me curious about how people around the world connect with brands.</p></div>
+          <div class="trrow"><h4>Italy</h4><div class="trgrid three"><div class="mat" style="--c: var(--p-mint)"><div class="ph" data-slot="tr-italy-jacket" data-label="Italy photo" data-ar="4 / 5"></div></div><div class="mat" style="--c: var(--p-lilac)"><div class="ph" data-slot="tr-italy-group" data-label="Italy photo" data-ar="4 / 5"></div></div><div class="mat" style="--c: var(--p-green)"><div class="ph" data-slot="tr-italy-cows" data-label="Italy photo" data-ar="4 / 5"></div></div></div></div>
+          <div class="trrow"><h4>Paris</h4><div class="trgrid"><div class="mat" style="--c: var(--p-pink)"><div class="ph" data-slot="tr-paris-louvre" data-label="Paris photo" data-ar="4 / 5"></div></div><div class="mat" style="--c: var(--p-yellow)"><div class="ph" data-slot="tr-paris-notredame" data-label="Paris photo" data-ar="4 / 5"></div></div><div class="mat" style="--c: var(--p-lilac)"><div class="ph" data-slot="tr-paris-eiffel" data-label="Paris photo" data-ar="4 / 5"></div></div><div class="mat" style="--c: var(--p-mint)"><div class="ph" data-slot="tr-paris-stalls" data-label="Paris photo" data-ar="4 / 5"></div></div></div></div>
+        </div>
+      </section>
+
+      <section class="sheet">
+        <div class="sh"><div><span class="label">What I bring</span></div></div>
+        <ul class="chips" id="bring" style="margin-top: -4px"></ul>
+      </section>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="view" id="v-contact" hidden>
+      <section class="sheet chero">
+        <div class="txt">
+          <span class="label">Contact</span>
+          <h1>Let's talk.</h1>
+          <p>I'm based in Madrid and originally from Houston. Reach me by email, WhatsApp, or phone. Use Copy if a button doesn't open your app.</p>
+          <div class="clist">
+            <div class="crow"><span class="label">University email</span><span class="value">kvital.ieu2025@student.ie.edu</span><span class="row"><button class="btn ghost copy" type="button" data-copy="kvital.ieu2025@student.ie.edu">Copy</button><a class="btn ghost" href="mailto:kvital.ieu2025@student.ie.edu">Email</a></span></div>
+            <div class="crow"><span class="label">Personal email</span><span class="value">kennedyvital122@gmail.com</span><span class="row"><button class="btn ghost copy" type="button" data-copy="kennedyvital122@gmail.com">Copy</button><a class="btn ghost" href="mailto:kennedyvital122@gmail.com">Email</a></span></div>
+            <div class="crow"><span class="label">Spain phone / WhatsApp</span><span class="value">+34 657753387</span><span class="row"><button class="btn ghost copy" type="button" data-copy="+34657753387">Copy</button><a class="btn ghost" href="https://wa.me/34657753387">WhatsApp</a></span></div>
+            <div class="crow"><span class="label">US phone</span><span class="value">+1 8328886655</span><span class="row"><button class="btn ghost copy" type="button" data-copy="+18328886655">Copy</button><a class="btn ghost" href="tel:+18328886655">Call</a></span></div>
+          </div>
+        </div>
+        <div class="mat" style="--c: var(--p-yellow)"><div class="ph" data-slot="contact-photo" data-label="Are you ready? graphic" data-ar="4 / 5"></div></div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <span>Kennedy Vital · Communication and Digital Media Marketing, IE University</span>
+    <span>Madrid · Houston</span>
+  </footer>
+</div>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-labelledby="vt" hidden>
+  <div class="vbar">
+    <span class="vt" id="vt"></span>
+    <span class="vc" id="vc" aria-live="polite"></span>
+    <button class="vbtn" id="vzoom" type="button" aria-pressed="false">Zoom in</button>
+    <button class="vbtn" id="vclose" type="button">Close</button>
+  </div>
+  <div class="stage" id="stage"><img id="vimg" alt=""></div>
+  <div class="vnav">
+    <button class="vbtn" id="vprev" type="button">Previous</button>
+    <button class="vbtn" id="vnext" type="button">Next</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Photo slots. Each entry fills the slot with that id: src, alt text, and the focal point of the crop.
+  var PHOTOS = {
+    'hero-portrait':  { src: 'photos/hero.jpg', alt: 'A woman in glasses and a brown jacket sits on a chair with a laptop and books, on the phone, while hands reach in from every side holding phones', pos: '50% 35%' },
+    'home-podcast':   { src: 'photos/podcast2.jpg', alt: 'Studio portrait of two people standing back to back in black outfits and sunglasses, one wearing headphones and the other holding a camera', pos: '50% 35%' },
+    'about-portrait': { src: 'photos/car.jpg', alt: 'Kennedy smiling in a selfie in a car', pos: '45% 40%' },
+    'about-1':        { src: 'photos/park-zoom.jpg', alt: 'Kennedy standing in front of flower beds in a park at sunset', pos: '50% 50%' },
+    'about-2':        { src: 'photos/hero.jpg', alt: 'Black-and-white photo of a woman at a desk chair with a laptop and phones, hands reaching in from every side', pos: '50% 35%' },
+    'about-3':        { src: 'photos/food.jpg', alt: 'Kennedy smiling at an outdoor restaurant table with a plate of food', pos: '50% 45%' },
+    'vb-team':        { src: 'photos/vb-team.jpg', alt: 'Kennedy and her volleyball teammates posing together in navy jerseys, two of them holding volleyballs', pos: '50% 45%' },
+    'vb-solo':        { src: 'photos/vb-solo.jpg', alt: 'Kennedy in a number 4 volleyball jersey holding a volleyball and pointing at the camera', pos: '50% 40%' },
+    'vb-duo':         { src: 'photos/vb-duo.jpg', alt: 'Kennedy kneeling with a volleyball next to a teammate standing with her arms crossed', pos: '50% 45%' },
+    'tr-italy-jacket': { src: 'photos/tr-italy-jacket.jpg', alt: 'Kennedy smiling in a blue rain jacket on a grassy hillside with the Dolomite mountains behind her', pos: '50% 40%' },
+    'tr-italy-group': { src: 'photos/tr-italy-group.jpg', alt: 'Kennedy and three hiking companions smiling in a selfie on a mountain trail', pos: '50% 50%' },
+    'tr-italy-cows': { src: 'photos/tr-italy-cows.jpg', alt: 'Two brown and white cows face to face in an alpine meadow with green hills behind', pos: '50% 70%' },
+    'tr-paris-louvre': { src: 'photos/tr-paris-louvre.jpg', alt: 'The Louvre and an autumn tree beside the Seine at sunset with a pink cloud', pos: '50% 55%' },
+    'tr-paris-notredame': { src: 'photos/tr-paris-notredame.jpg', alt: 'Kennedy and a friend posing in front of Notre-Dame at night', pos: '50% 70%' },
+    'tr-paris-eiffel': { src: 'photos/tr-paris-eiffel.jpg', alt: 'The Eiffel Tower lit up gold at night framed by dark trees', pos: '50% 50%' },
+    'tr-paris-stalls': { src: 'photos/tr-paris-stalls.jpg', alt: 'A riverside bookstall in Paris with vintage Vogue covers and travel posters', pos: '50% 55%' },
+    'contact-photo':  { src: 'photos/phone-pink.jpg', alt: 'A pink retro phone receiver hanging by its cord next to the words Are you ready', pos: '50% 50%' }
+  };
+
+  var SKILLS = ['Campaign strategy', 'Social media', 'Podcast production', 'Storytelling', 'Content creation', 'Audience engagement', 'Customer psychology'];
+  var BRING = [['Campaign planning', 'pink'], ['Message shaping', 'yellow'], ['Storytelling', 'green'], ['Content production', 'peach'], ['Audience engagement', 'lilac'], ['Podcast hosting', 'mint'], ['Interviewing', 'rose'], ['Customer psychology', 'pink']];
+
+  var PROJECTS = [
+    { n: 1, color: 'pink', cat: 'campaign', title: 'Hydrate Everything', brand: 'Owala × amika', type: 'Campaign proposal', team: false,
+      blurb: 'A limited-edition collaboration that connects reusable water bottles with haircare.',
+      desc: 'A proposed limited-edition collaboration connecting reusable water bottles with haircare through a head-to-toe hydration and self-care idea.',
+      lists: [{ label: 'What the proposal includes', items: ['Floral-designed bottles', 'Collectible charms', 'Social hydration challenges'] }],
+      notes: ['These are intended benefits, not measured results.'],
+      sets: [{ slug: 'owala', n: 8, label: 'Hydrate Everything proposal', ar: '16 / 9' }], cover: 'pages/owala/t-01.jpg' },
+    { n: 2, color: 'yellow', cat: 'strategy', title: "McDonald's CSR Communication Strategy", brand: "McDonald's", type: 'Communication strategy', team: false,
+      blurb: "A strategy to make McDonald's CSR efforts more relevant, interactive, and transparent.",
+      desc: "A proposed strategy to make McDonald's CSR efforts more relevant, interactive, and transparent for customers.",
+      lists: [{ label: 'Ideas in the strategy', items: ['QR codes on packaging', 'Customer feedback and voting', 'Packaging return program with loyalty points', 'Sharing progress and gaps'] }],
+      notes: ['Intended outcomes were not measured.'],
+      sets: [{ slug: 'mcdonalds', n: 24, label: 'CSR communication strategy', ar: '16 / 9' }], cover: 'pages/mcdonalds/t-01.jpg' },
+    { n: 3, color: 'green', cat: 'strategy', title: 'Amazon Social Media Audit', brand: 'Amazon · Prime Big Deal Days', type: 'Social media audit', team: true,
+      blurb: 'An audit of five platforms with a proposal to tailor Prime Big Deal Days content to each one.',
+      desc: "An audit of Amazon's Instagram, TikTok, LinkedIn, X, and Facebook, with a proposal to tailor Prime Big Deal Days content to each platform.",
+      lists: [{ label: 'Platforms audited', items: ['Instagram', 'TikTok', 'LinkedIn', 'X', 'Facebook'] },
+              { label: 'The proposal', items: ['Instagram and TikTok: short creator-style videos', 'Facebook: video with a “Learn more” link', 'Instagram creator collaborations', 'X left out of the Prime Days promotion'] }],
+      notes: ['Project dates in the description I was given: October 6–7, 2026.'],
+      sets: [{ slug: 'amazon', n: 21, label: 'Social media audit', ar: '16 / 9' }], cover: 'pages/amazon/t-01.jpg' },
+    { n: 4, color: 'peach', cat: 'product', title: 'Modular Chair: From Sketch to 3D Print', brand: 'Outdoor shared workspace', type: 'Product design', team: true,
+      blurb: 'A geometric chair made of separate pieces that rearrange for one person or a group.',
+      desc: 'A team product-design project for an outdoor shared workspace. The concept is a geometric chair made from separate pieces that can be rearranged for individual or group seating.',
+      lists: [{ label: 'The process', items: ['Basic-shape practice', 'Sketching views and layouts', 'Concept refinement', '3D model', '3D printed prototype'] }],
+      notes: [],
+      sets: [{ slug: 'chair', n: 8, label: 'Modular chair project', ar: '16 / 9' }], cover: 'pages/chair/t-02.jpg' },
+    { n: 5, color: 'lilac', cat: 'campaign', title: 'ECLIPSE: Sun & Moon', brand: 'Revlon · Fire & Ice', type: 'Campaign concept', team: true,
+      blurb: "A gender-neutral fragrance campaign concept reimagining Revlon's Fire & Ice line for a younger audience.",
+      desc: "A team campaign concept reimagining Revlon's Fire & Ice fragrance line for a younger audience. Sun and moon imagery represents different qualities coming together.",
+      lists: [{ label: 'Campaign line', items: ['"For every version of you."'] },
+              { label: 'What the project included', items: ['Gen Z research on identity and inclusivity', 'Mood board and playlist', 'Instagram and TikTok mockups', 'Warm and cool lighting, gold and silver details'] }],
+      notes: [],
+      sets: [{ slug: 'revlon', n: 12, label: 'ECLIPSE campaign deck', ar: '16 / 9' }], cover: 'pages/revlon/t-01.jpg' },
+    { n: 6, color: 'mint', cat: 'campaign', title: 'What Your Outfit Hides', brand: 'Fast fashion awareness', type: 'Persuasive campaign', team: true,
+      blurb: 'Digital posters about the hidden costs of fast fashion that invite choices without blaming viewers.',
+      desc: 'A team persuasive campaign about the hidden costs of fast fashion. The proposed digital posters use imagery, facts, relatable language, and QR codes to encourage thoughtful fashion choices without blaming viewers.',
+      lists: [{ label: 'The hidden costs', items: ['Unfair working conditions', 'Overproduction', 'Waste'] },
+              { label: 'How the posters work', items: ['Imagery', 'Facts', 'Relatable language', 'QR codes'] }],
+      notes: ['Audience behavior was not measured.'],
+      sets: [{ slug: 'ff-posters', n: 3, label: 'Digital posters', ar: '595 / 842' }, { slug: 'ff-proposal', n: 3, label: 'Campaign proposal', ar: '595 / 842' }], cover: 'pages/ff-posters/t-01.jpg' },
+    { n: 7, color: 'rose', cat: 'content', title: 'Young Founders Collective', brand: 'Podcast promotion', type: 'Podcast promotion', team: false, role: 'Producer',
+      blurb: 'Promotional materials that introduce a podcast to aspiring entrepreneurs.',
+      desc: 'I produced the podcast and created promotional materials to introduce it to aspiring entrepreneurs.',
+      lists: [{ label: 'What I managed', items: ['Audio and video production', 'Publishing on YouTube and Spotify', 'Performance tracking'] },
+              { label: 'The content', items: ['Launch teaser', 'Team introduction', 'Founder Q&As', 'Advice quotes', 'Business tips carousel'] },
+              { label: 'Visual identity', items: ['Blue, white, and black', 'Bold typography', 'Founder photography'] }],
+      notes: ['Performance figures come from tracking the show on YouTube and across podcast platforms.'],
+      sets: [{ slug: 'founders', n: 27, label: 'Promo materials', ar: '4 / 5' }], cover: 'pages/founders/t-02.jpg' },
+    { n: 8, color: 'peach', cat: 'content', title: 'The BEN Show', brand: 'Podcast · Apple Podcasts', type: 'Podcast co-host', team: false, format: 'Co-host · 25 episodes',
+      blurb: 'A podcast where I co-hosted 25 episodes with live interviews with energy experts.',
+      desc: 'I co-hosted 25 episodes of The BEN Show, featuring live interviews with energy experts.',
+      lists: [{ label: 'What I did', items: ['Co-hosted 25 episodes', 'Live interviews with energy experts', 'Researched oil and gas topics', 'Tailored content for young audiences'] },
+              { label: 'Recognition', items: ['500 viewers reached', 'Platform grown to 2,000+ followers', '1st place, OGGN Podcast Application Competition', 'Speaker, Offshore Technology Conference'] }],
+      notes: [], sets: [], cover: 'photos/ben-show.jpg' }
+];
+
+  var DETAILS = {"8": [["The show", "The BEN Show is a podcast on Apple Podcasts and Spotify. I co-hosted 25 episodes featuring live interviews with energy experts."], ["What I did", "I co-hosted live interviews, researched oil and gas topics, and tailored the content for young audiences."], ["The reach", "The show reached 500 viewers, and I helped grow the platform to more than 2,000 followers."], ["Recognition", "I won first place in the OGGN Podcast Application Competition and spoke at the Offshore Technology Conference before thousands of attendees."]], "1": [["The challenge", "As the bottle market gets crowded, Owala needs fresh ways to stay relevant and connect with consumers' everyday lives. At the same time, consumers may invest in haircare while overlooking hydration as part of their routine."], ["The proposal", "A limited-edition Owala × amika collaboration called “Hydrate Everything.” It pairs colorful, floral-designed Owala bottles with amika haircare and encourages people to care for their hair from the inside out. Collectible bottle charms add a personal, interactive element, and social media hydration challenges bring the idea into daily routines."], ["How it addresses the problem", "Rather than asking consumers to adopt a completely new habit, the campaign connects two routines they may already have: carrying a water bottle and caring for their hair. The bottle becomes a visible reminder to stay hydrated, while the partnership gives Owala a lifestyle connection beyond its product design."], ["Benefits", "The concept gives Owala a new way to stand out, makes the collaboration feel personal through collectible charms, and creates opportunities for people to participate and share content. It brings wellness and beauty together in a single, easy-to-understand summer campaign."]], "2": [["The challenge", "There was a gap between McDonald's corporate social responsibility (CSR) efforts and what customers believed about the brand. Customers often did not notice the company's environmental commitments or see McDonald's as socially responsible. One-way communication, doubts about the company's motives, limited customer involvement, and negative associations with fast food all contributed to the disconnect."], ["The proposal", "Make McDonald's CSR communication more relevant, interactive, and transparent. The strategy focuses on issues customers care about and gives them ways to take part, ask questions, and see progress."], ["How it addresses the problem", "Customers get a voice through opportunities to comment, vote on priorities, and suggest improvements. QR codes on packaging would link to a CSR progress website, and a packaging return program with loyalty points would give customers a direct way to participate. Sharing goals, results, and gaps would make the company's commitments more visible and credible."], ["Benefits", "The strategy aims to increase awareness and customer engagement, strengthen trust in McDonald's CSR efforts, improve local perceptions of the brand, and build stronger community connections."]], "3": [["The challenge", "The audit examined how Amazon uses Instagram, TikTok, LinkedIn, X, and Facebook and found that each platform serves a different audience and purpose. Amazon's challenge was to promote Prime Big Deal Days (October 6–7, 2026) in a way that felt engaging and platform-appropriate instead of like a standard ad."], ["The proposal", "A coordinated campaign built around one core message, adapted to each platform. Instagram and TikTok could use short, creator-style videos to build interest. Facebook could pair the video with a direct “Learn more” link. Instagram creator collaborations could showcase discounted products and connect different audiences."], ["How it addresses the problem", "The approach keeps Amazon's core promise of convenience and discovery consistent while changing the content and call to action for each platform. X is treated differently: the audit identified it as a channel for corporate news and innovation, so the proposal leaves it out of the Prime Days promotion."], ["Benefits", "The strategy aims to make the promotion feel more natural in each platform's feed, help shoppers discover deals, and give them a clear next step. Creator collaborations can introduce products to new audiences, and platform-specific content supports a more consistent campaign across Amazon's social channels."]], "4": [["The challenge", "The team needed to build its sketching skills and use them to create a product design: moving from simple geometric forms to a chair concept that could work in a shared outdoor setting."], ["The proposal", "A geometric, modular chair made of separate seating pieces that can be rearranged for different needs. Taller sections provide back support, and the pieces can be arranged for individual use or group seating."], ["How we developed it", "We began by practicing how to represent objects with basic shapes, then sketched different views and layouts for the outdoor seating idea. We refined the concept into a chair design, modeled it, and 3D printed it as a prototype."], ["Benefits", "The concept offers flexible seating that can adapt to different users and arrangements. The 3D-printed prototype helped bring the design from a drawing into a tangible model, connecting sketching practice with product development."]], "5": [["The challenge", "Reimagine Revlon's Fire & Ice product line as a gender-neutral fragrance campaign for a younger audience: make a legacy beauty brand feel more current and inclusive in a crowded fragrance market, while communicating the idea clearly through social media."], ["The proposal", "ECLIPSE: Sun & Moon presents the fragrance as a blend of qualities rather than a choice between opposites. The sun represents warmth and visibility; the moon represents calm and introspection. Their overlap in an eclipse became a symbol of transformation and fluid identity."], ["How we developed it", "We researched Gen Z interests in identity, self-expression, and inclusivity, then built a visual direction using a mood board and playlist. We carried the concept into Instagram and TikTok mockups with warm and cool lighting, contrasting gold and silver details, and male and female models, keeping the perfume central and using the line “For every version of you.”"], ["Benefits", "The concept gives Revlon a way to refresh a familiar product line with a more inclusive message and a distinctive visual identity. Social-first creative and potential micro-influencer collaborations could help the brand connect with younger audiences and encourage engagement."]], "6": [["The challenge", "A persuasive campaign about the hidden costs of fast fashion, aimed at young women in their twenties, who can face pressure from social media trends to keep buying new clothes. The goal was to encourage more informed, conscious fashion choices by showing what a low price can conceal: unfair working conditions, overproduction, and waste."], ["The proposal", "A series of digital posters under the theme “What Your Outfit Hides.” The campaign uses three approaches: memorable imagery to make environmental impacts easier to recall, factual messages about garment workers' conditions, and relatable language about finding a “good deal” to invite reflection without blaming the audience."], ["How we developed it", "The final posters turn those ideas into short, visual messages. One connects a low clothing price to underpaid workers; another uses the image of a person surrounded by clothes to highlight overproduction; a third reframes the appeal of a bargain by pointing to the money and waste people could save by buying less. QR codes provide a way to explore more information."], ["Benefits", "The campaign makes the consequences of fast fashion more visible and gives its audience practical prompts to reconsider impulse purchases and shop more sustainably. It aims to encourage reflection and informed choices rather than make viewers feel judged."]], "7": [["The challenge", "I produced and published Young Founders Collective episodes across YouTube and Spotify, managing audio and video production, publishing, and performance tracking. I also created promotional content to introduce the show and build interest among aspiring founders. The challenge was to make the podcast's purpose clear and give its audience a reason to follow along."], ["The proposal", "I positioned the podcast as a place for young entrepreneurs to hear practical advice, founder stories, and honest perspectives on building a business."], ["How I promoted it", "I created a coordinated set of social media posters and posts, including a launch teaser, team introduction, founder Q&As, short advice quotes, and a carousel with business-starting tips. A consistent blue, white, and black palette, paired with bold typography and founder photography, tied the content together."], ["Benefits", "The campaign gives the podcast a recognizable visual identity and communicates what listeners can expect: relatable voices and useful insights from young founders. The mix of promotional and educational posts also offers different ways for people to discover and engage with the show."]]};
+  var NOTES = {"8": "","1": "This is a proposed campaign concept; these are intended benefits, not measured results.", "2": "This is a proposed communication strategy; these are intended benefits, not measured results.", "3": "This is a proposed strategy; the benefits are intended outcomes, not measured results.", "4": "This is a team product-design project; the benefits describe the intended value of the concept.", "5": "This is a campaign concept; the benefits described are intended outcomes, not measured results.", "6": "This is a persuasive campaign concept; its effect on shopping behavior was not measured.", "7": "Performance figures come from tracking the show on YouTube and across podcast platforms."};
+
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  var ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>';
+  var RINGS = '<svg class="rings" viewBox="0 0 40 24" aria-hidden="true"><use href="#i-rings"/></svg>';
+
+  // ---------- photo slots ----------
+  function hydrateSlots(root) {
+    $$('[data-slot]', root).forEach(function (el) {
+      if (el.getAttribute('data-done')) return;
+      var id = el.getAttribute('data-slot');
+      var label = el.getAttribute('data-label') || 'Photo';
+      el.classList.add('ph');
+      el.style.setProperty('--ar', el.getAttribute('data-ar') || '4 / 3');
+      var p = PHOTOS[id];
+      if (p) {
+        el.style.setProperty('--pos', p.pos || '50% 50%');
+        el.innerHTML = '<img src="' + esc(p.src) + '" alt="' + esc(p.alt || label) + '" loading="lazy">';
+      } else {
+        el.classList.add('empty');
+        el.setAttribute('role', 'img');
+        el.setAttribute('aria-label', 'Photo space: ' + label);
+        el.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-camera"/></svg><strong>Photo space</strong><span>' + esc(label) + '</span><code>' + esc(id) + '</code>';
+      }
+      el.setAttribute('data-done', '1');
+    });
+  }
+
+  if ($('#skills')) $('#skills').innerHTML = SKILLS.map(function (s, i) { return '<span class="label">' + (i ? RINGS : '') + esc(s) + '</span>'; }).join('');
+  $('#bring').innerHTML = BRING.map(function (b) { return '<li style="--c: var(--p-' + b[1] + ')">' + esc(b[0]) + '</li>'; }).join('');
+
+  // ---------- project slide cards ----------
+  var ORDER = [7, 8, 1, 2, 3, 4, 5, 6];
+  function rank(p) { return ORDER.indexOf(p.n) + 1; }
+  function fmt(p) { if (p.format) { return p.format; } return p.team ? 'Team project' : (p.role ? 'Individual · ' + p.role : 'Individual project'); }
+  function card(p, variant) {
+    var cls = 'slide' + (variant === 'v' ? ' v' : (rank(p) % 2 === 0 ? ' rev' : ''));
+    return '<a class="' + cls + '" href="#project-' + p.n + '" data-cat="' + p.cat + '" style="--c: var(--p-' + p.color + ')">' +
+      '<div class="stxt"><span class="num">' + pad(rank(p)) + '</span><h3>' + esc(p.title) + '</h3><p class="blurb">' + esc(p.blurb) + '</p>' +
+      '<dl class="tbl"><dt>Project</dt><dd>' + esc(p.brand) + '</dd><dt>Type</dt><dd>' + esc(p.type) + '</dd><dt>Format</dt><dd>' + esc(fmt(p)) + '</dd></dl>' +
+      '<span class="go">View project ' + ARROW + '</span></div>' +
+      '<div class="simg"><img src="' + p.cover + '" alt="Cover of ' + esc(p.title) + '" loading="lazy"></div></a>';
+  }
+  $('#featured').innerHTML = [1, 2, 3].map(function (n) { return card(PROJECTS[n - 1], 'v'); }).join('');
+  $('#allwork').innerHTML = ORDER.map(function (n) { return card(PROJECTS[n - 1], 'h'); }).join('');
+
+  $$('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var f = tab.getAttribute('data-f');
+      $$('.tab').forEach(function (t) { t.setAttribute('aria-pressed', String(t === tab)); });
+      $$('#allwork .slide').forEach(function (c) { c.hidden = !(f === 'all' || c.getAttribute('data-cat') === f); });
+    });
+  });
+
+  // ---------- project page ----------
+  function renderProject(p) {
+    var prev = PROJECTS[ORDER[(rank(p) + ORDER.length - 2) % ORDER.length] - 1];
+    var next = PROJECTS[ORDER[rank(p) % ORDER.length] - 1];
+    var rows = '<dt>Project</dt><dd>' + esc(p.brand) + '</dd><dt>Type</dt><dd>' + esc(p.type) + '</dd><dt>Format</dt><dd>' + esc(fmt(p)) + '</dd>';
+    var lists = p.lists.map(function (l) {
+      return '<div><span class="label">' + esc(l.label) + '</span><ul class="chips" style="--c: var(--p-' + p.color + ')">' + l.items.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul></div>';
+    }).join('');
+    var tcol = ['pink', 'yellow', 'mint', 'lilac', 'peach', 'green'];
+    var story = DETAILS[p.n].map(function (d, i) {
+      return '<div class="tile" style="--c: var(--p-' + tcol[(p.n + i) % tcol.length] + ')"><span class="num">' + pad(i + 1) + '</span><h3>' + esc(d[0]) + '</h3><p>' + esc(d[1]) + '</p></div>';
+    }).join('');
+    var notes = NOTES[p.n] ? '<p class="note"><b>Note</b>' + esc(NOTES[p.n]) + '</p>' : '';
+    var gallery = p.sets.map(function (s) {
+      var thumbs = '';
+      for (var i = 1; i <= s.n; i++) {
+        thumbs += '<button class="thumb" type="button" data-set="' + s.slug + '" data-i="' + i + '" style="--ar: ' + s.ar + '" aria-label="Open ' + esc(s.label) + ', page ' + i + '"><img src="pages/' + s.slug + '/t-' + pad(i) + '.jpg" alt="" loading="lazy"><span>' + pad(i) + '</span></button>';
+      }
+      return '<div class="thumbs-wrap"><div class="thumbs-head"><h4>' + esc(s.label) + ' · ' + s.n + ' pages</h4><button class="btn" type="button" data-set="' + s.slug + '" data-i="1">Open full view ' + ARROW + '</button></div><div class="thumbs">' + thumbs + '</div></div>';
+    }).join('');
+    var h = '<a class="back" href="#work">' + ARROW + ' All work</a>' +
+      '<section class="sheet phead"><div class="txt"><div><span class="num">' + pad(rank(p)) + '</span></div><h1>' + esc(p.title) + '</h1><dl class="tbl">' + rows + '</dl></div>' +
+      '<div class="stage-img" style="--c: var(--p-' + p.color + ')"><img src="' + p.cover + '" alt="Cover of ' + esc(p.title) + '"></div></section>' +
+      '<section class="story">' + story + '</section>' +
+      '<section class="sheet atg"><div class="lists">' + lists + '</div>' + notes + '</section>' +
+      (p.n === 7 ? '<section class="sheet"><div class="sh"><div><span class="label">Performance</span><h2>The numbers</h2></div><p class="lead">I tracked how the show performed across YouTube and Spotify.</p></div>' + yfcStats() + '</section>' : '') +
+      (p.n === 7 ? '<section class="sheet"><div class="sh"><div><span class="label">Listen and follow</span><h2>Find the show</h2></div></div><div class="row">' + yfcLinks() + '</div></section>' : '') +
+      (p.sets.length ? '<section class="sheet"><div class="sh"><div><span class="label">The work</span><h2>Page by page</h2></div><p class="lead">Tap any page to read it full size.</p></div>' + gallery + '</section>' : '<section class="sheet"><div class="sh"><div><span class="label">Listen</span><h2>Hear the show</h2></div></div><div class="row"><a class="btn" href="' + BEN_URL + '" target="_blank" rel="noopener noreferrer">Listen on Apple Podcasts ' + ARROW + '</a></div></section>') +
+      '<section class="pn"><a class="prev tile" href="#project-' + prev.n + '" style="--c: var(--p-' + prev.color + ')"><span class="label">Previous · ' + pad(rank(prev)) + '</span><h3>' + esc(prev.title) + '</h3></a><a class="next tile" href="#project-' + next.n + '" style="--c: var(--p-' + next.color + ')"><span class="label">Next · ' + pad(rank(next)) + '</span><h3>' + esc(next.title) + '</h3></a></section>';
+    var v = $('#v-project');
+    v.innerHTML = h;
+    hydrateSlots(v);
+  }
+
+  function yfcStats() {
+    return '<div class="bstats"><div><span class="big">7.4K</span><span class="label">YouTube impressions</span></div><div><span class="big">922</span><span class="label">YouTube views</span></div><div><span class="big">357</span><span class="label">Plays and downloads</span></div></div>';
+  }
+  var YFC = [['Website', 'https://yfcollectivemedia.com/'], ['Instagram', 'https://www.instagram.com/youngfoundercollective/'], ['YouTube', 'https://www.youtube.com/@YoungFoundersCollective'], ['Spotify', 'https://open.spotify.com/show/5bEv8QLzdQiZU9waDbFbId'], ['Apple Podcasts', 'https://podcasts.apple.com/us/podcast/young-founders-collective/id1879274392']];
+  function yfcLinks() {
+    return YFC.map(function (l) { return '<a class="tl" href="' + l[1] + '" target="_blank" rel="noopener noreferrer">' + l[0] + ' ' + ARROW + '</a>'; }).join('');
+  }
+  ['yfc-stats-home'].forEach(function (id) { var el = document.getElementById(id); if (el) { el.innerHTML = yfcStats(); } });
+  ['yfc-home', 'yfc-about'].forEach(function (id) { var el = document.getElementById(id); if (el) { el.innerHTML = yfcLinks(); } });
+
+  var BEN_URL = 'https://podcasts.apple.com/us/podcast/the-ben-show/id1735609981';
+  function benHTML() {
+    return '<section class="sheet ben"><div class="mat" style="--c: var(--p-yellow)"><div class="ph" style="--ar: 1 / 1"><img src="photos/ben-show.jpg" alt="The BEN Show podcast cover art" loading="lazy"></div></div>' +
+      '<div class="txt"><span class="label">My podcast</span><h2>The BEN Show</h2>' +
+      '<p>I co-hosted 25 episodes of The BEN Show, with live interviews with energy experts. I researched oil and gas topics and tailored the content for young audiences.</p>' +
+      '<div class="bstats"><div><span class="big">25</span><span class="label">Episodes co-hosted</span></div><div><span class="big">500</span><span class="label">Viewers reached</span></div><div><span class="big">2,000+</span><span class="label">Followers</span></div></div>' +
+      '<ul class="chips" style="--c: var(--p-pink)"><li>1st place · OGGN Podcast Application Competition</li><li style="--c: var(--p-green)">Speaker · Offshore Technology Conference</li></ul>' +
+      '<div class="row"><a class="btn" href="' + BEN_URL + '" target="_blank" rel="noopener noreferrer">Listen on Apple Podcasts ' + ARROW + '</a></div></div></section>';
+  }
+  ['ben-home', 'ben-about'].forEach(function (id) { var el = document.getElementById(id); if (el) { el.innerHTML = benHTML(); } });
+
+  // ---------- routing ----------
+  var VIEWS = ['home', 'work', 'about', 'contact'];
+  function showView(id) {
+    $$('.view').forEach(function (v) { v.hidden = v.id !== 'v-' + id; });
+  }
+  function route() {
+    var h = (location.hash || '#home').replace('#', '');
+    var m = h.match(/^project-(\d+)$/);
+    var cur = 'home';
+    if (m && PROJECTS[parseInt(m[1], 10) - 1]) {
+      renderProject(PROJECTS[parseInt(m[1], 10) - 1]);
+      showView('project');
+      cur = 'work';
+    } else if (VIEWS.indexOf(h) > -1) {
+      showView(h);
+      cur = h;
+    } else {
+      showView('home');
+    }
+    $$('#links a').forEach(function (a) {
+      if (a.getAttribute('data-r') === cur) { a.setAttribute('aria-current', 'page'); } else { a.removeAttribute('aria-current'); }
+    });
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+  hydrateSlots(document);
+  route();
+
+  // ---------- viewer ----------
+  var viewer = $('#viewer'), vimg = $('#vimg'), stage = $('#stage'), vzoom = $('#vzoom');
+  var cur = { set: '', n: 0, i: 1, title: '' };
+  var opener = null;
+  var SETS = {};
+  PROJECTS.forEach(function (p) { p.sets.forEach(function (s) { SETS[s.slug] = { n: s.n, title: p.title + ': ' + s.label }; }); });
+  function show(i) {
+    cur.i = Math.min(cur.n, Math.max(1, i));
+    vimg.src = 'pages/' + cur.set + '/' + pad(cur.i) + '.jpg';
+    vimg.alt = cur.title + ', page ' + cur.i + ' of ' + cur.n;
+    $('#vc').textContent = cur.i + ' / ' + cur.n;
+    $('#vprev').disabled = cur.i === 1;
+    $('#vnext').disabled = cur.i === cur.n;
+    stage.scrollTop = 0; stage.scrollLeft = 0;
+    if (cur.i < cur.n) { new Image().src = 'pages/' + cur.set + '/' + pad(cur.i + 1) + '.jpg'; }
+  }
+  function setZoom(on) {
+    stage.classList.toggle('zoom', on);
+    vzoom.setAttribute('aria-pressed', String(on));
+    vzoom.textContent = on ? 'Zoom out' : 'Zoom in';
+  }
+  function openViewer(btn) {
+    var slug = btn.getAttribute('data-set');
+    opener = btn;
+    cur.set = slug; cur.n = SETS[slug].n; cur.title = SETS[slug].title;
+    $('#vt').textContent = cur.title;
+    setZoom(false);
+    viewer.hidden = false;
+    document.body.style.overflow = 'hidden';
+    show(parseInt(btn.getAttribute('data-i'), 10) || 1);
+    $('#vclose').focus();
+  }
+  function closeViewer() {
+    viewer.hidden = true;
+    document.body.style.overflow = '';
+    vimg.removeAttribute('src');
+    if (opener && document.body.contains(opener)) { opener.focus(); }
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('[data-set][data-i]') : null;
+    if (b) { openViewer(b); }
+  });
+  $('#vclose').addEventListener('click', closeViewer);
+  $('#vprev').addEventListener('click', function () { show(cur.i - 1); });
+  $('#vnext').addEventListener('click', function () { show(cur.i + 1); });
+  vzoom.addEventListener('click', function () { setZoom(!stage.classList.contains('zoom')); });
+  document.addEventListener('keydown', function (e) {
+    if (viewer.hidden) return;
+    if (e.key === 'Escape') { closeViewer(); }
+    else if (e.key === 'ArrowRight') { show(cur.i + 1); }
+    else if (e.key === 'ArrowLeft') { show(cur.i - 1); }
+  });
+  var tx = null;
+  stage.addEventListener('touchstart', function (e) { tx = stage.classList.contains('zoom') ? null : e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', function (e) {
+    if (tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 60) { show(cur.i + (dx < 0 ? 1 : -1)); }
+  });
+
+  // ---------- copy buttons ----------
+  $$('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      var done = function () { var old = btn.textContent; btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = old; }, 1400); };
+      var fallback = function () {
+        var v = btn.closest('.crow').querySelector('.value');
+        var r = document.createRange(); r.selectNodeContents(v);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Selected';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1800);
+      };
+      try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+    });
+  });
+})();
+</script>
